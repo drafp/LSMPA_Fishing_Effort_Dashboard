@@ -59,14 +59,14 @@ library(diffeR)
 
 #### DATA SETUP: Import Data 
 
-#setwd("/Users/diego/Desktop/LSMPA_Fishing_Effort_Dashboard")
+#setwd("LSMPA_Fishing_Effort_Dashboard/Data Dependencies")
 
 # Load general fishing vessel information
-tbl.fishing.vessels <- read_csv("fishing-vessels-v2.csv")
+tbl.fishing.vessels <- read_csv("Fishing Vessel Reference Information/fishing-vessels-v2.csv")
 
 #### Load data for each LSMPA/EEZ ####
 # load global eezs
-global.eez <- read_sf("Geospatial boundaries/World_EEZ_v11_20191118_LR")
+global.eez <- read_sf("Geospatial Boundaries/Global Exclusive Economic Zones")
 
 # Filter global EEZs to form Parties to Nauru Agreement boundary
 nauru.parties.eez <- global.eez %>% filter(`GEONAME` %in% c("Micronesian Exclusive Economic Zone",
@@ -82,7 +82,7 @@ nauru.parties.eez <- global.eez %>% filter(`GEONAME` %in% c("Micronesian Exclusi
                                            
 ### Palau National Marine Sanctuary ###
 # load geospatial boundary for Palau National Marine Sanctuary
-sf.pnms <- read_sf("Geospatial boundaries/LSMPAs/PNMS Shape")
+sf.pnms <- read_sf("Geospatial Boundaries/LSMPAs/PNMS Shapefile")
 
 # load geospatial boundary for Exclusive Economic Zone of Palau
 #sf.palau.eez <- read_sf("Geospatial boundaries/EEZs/Palau EEZ Shape")
@@ -113,7 +113,7 @@ numeric.bbox.pmns <- numeric.bbox.pmns + vector.boundary.buffer
 
 # Load LSMPA Specific Datasets
 # MMSI
-pnms.mmsi.data.filename <- "LSMPA Specfic Datasets/PNMS/MMSI.csv"
+pnms.mmsi.data.filename <- "LSMPA Specfic Datasets/Filtered For PNMS/MMSI.csv"
 
 pnms.tbl.daily.mmsi.data <- read_csv(
   pnms.mmsi.data.filename, col_types = cols(
@@ -131,7 +131,7 @@ pnms.vessel.tbl.daily.mmsi.data <- pnms.tbl.daily.mmsi.data %>% left_join(
   tbl.fishing.vessels, by = c("mmsi"))
 
 
-# # Fleet
+# # Fleet -- Deprecated
 # pnms.fleet.data.filename <- "LSMPA Specfic Datasets/PNMS/Fleet.csv"
 # 
 # pnms.tbl.daily.fleet.data <- read_csv(
@@ -158,50 +158,45 @@ palau.labels.tbl <- tibble(id = palau.labels, lon = palau.lon, lat = palau.lat)
 
 
 
-# Niue LSMPA
-
-
-# load geospatial boundary for Niue
-sf.niue <- read_sf("Geospatial boundaries/LSMPAs/Niue LSMPA Shapefile")
-
-# load geospatial boundary for Exclusive Economic Zone of Palau
-#sf.palau.eez <- read_sf("Geospatial boundaries/EEZs/Palau EEZ Shape")
-
-# load nearby eezs
-niue.neighboring.eez <- global.eez %>% filter(`GEONAME` %in% c("Tongan Exclusive Economic Zone",
-                                                               "Samoan Exclusive Economic Zone",
-                                                               "American Samoa Exclusive Economic Zone",
-                                                               "Cook Islands Exclusive Economic Zone",
-                                                               "Niue Exclusive Economic Zone"
-))
-
-
-
-# Load LSMPA Specific Datasets
-# MMSI
-niue.mmsi.data.filename <- "LSMPA Specfic Datasets/niuemmsi.csv"
-
-niue.tbl.daily.mmsi.data <- read_csv(
-  niue.mmsi.data.filename, col_types = cols(
-    date = col_date(format = ""),
-    cell_ll_lat = col_double(),
-    cell_ll_lon = col_double(),
-    mmsi = col_double(),
-    hours = col_double(),
-    fishing_hours = col_double()
-  )
-)
-
-# Create a merged dataset with mmsi and vessel data
-niue.vessel.tbl.daily.mmsi.data <- niue.tbl.daily.mmsi.data %>% left_join(
-  tbl.fishing.vessels, by = c("mmsi"))
-
-# Create Niue Labels
-niue.labels <- c("Niue EEZ", "High Seas")
-niue.lon <- c(-168, -166)
-niue.lat <- c(-20, -22.5)
-
-niue.labels.tbl <- tibble(id = niue.labels, lon = niue.lon, lat = niue.lat)
+# ## Niue LSMPA -- include if data for Niue is present
+# # load geospatial boundary for Niue
+# sf.niue <- read_sf("Geospatial Boundaries/LSMPAs/Niue LSMPA Shapefile")
+# 
+# # load nearby eezs
+# niue.neighboring.eez <- global.eez %>% filter(`GEONAME` %in% c("Tongan Exclusive Economic Zone",
+#                                                                "Samoan Exclusive Economic Zone",
+#                                                                "American Samoa Exclusive Economic Zone",
+#                                                                "Cook Islands Exclusive Economic Zone",
+#                                                                "Niue Exclusive Economic Zone"
+# ))
+# 
+# 
+# 
+# # Load LSMPA Specific Datasets
+# # MMSI
+# niue.mmsi.data.filename <- "LSMPA Specfic Datasets/niuemmsi.csv"
+# 
+# niue.tbl.daily.mmsi.data <- read_csv(
+#   niue.mmsi.data.filename, col_types = cols(
+#     date = col_date(format = ""),
+#     cell_ll_lat = col_double(),
+#     cell_ll_lon = col_double(),
+#     mmsi = col_double(),
+#     hours = col_double(),
+#     fishing_hours = col_double()
+#   )
+# )
+# 
+# # Create a merged dataset with mmsi and vessel data
+# niue.vessel.tbl.daily.mmsi.data <- niue.tbl.daily.mmsi.data %>% left_join(
+#   tbl.fishing.vessels, by = c("mmsi"))
+# 
+# # Create Niue Labels
+# niue.labels <- c("Niue EEZ", "High Seas")
+# niue.lon <- c(-168, -166)
+# niue.lat <- c(-20, -22.5)
+# 
+# niue.labels.tbl <- tibble(id = niue.labels, lon = niue.lon, lat = niue.lat)
 
 
 
@@ -3101,6 +3096,8 @@ shinyApp(ui = ui, server = server)
 
 
 #### DEPRECATED: EXTRA/DRAFTING ####
+## The following code is draft code for various sections of the dashboard and
+## can be ignored. It is preserved for reference.
 
 ## TMAP Supporting functions
 # ## Rearrange Data Col-Wise to support Raster mapping
