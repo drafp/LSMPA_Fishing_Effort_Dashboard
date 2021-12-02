@@ -3,6 +3,15 @@
 
 This dashboard explores changes in industrial fishing effort at various timescales in regions with established Large-Scale Marine Protected Areas (LSMPAs), and relies on data downloaded from Global Fishing Watch, accessed under Creative Commons.
 
+# File Structure
+## Dashboard Specific Files
+The Shiny-R script titled /"LSMPA_Fishing_Effort_Dashboard.R/" houses the code to run the LSMPA Fishing Effort Dashboard using Shiny-R, relying on data dependencies. The code relies on both filtered Global Fishing Watch Fishing Effort data and geospatial data dependencies (shapefiles). The folder titled /"Geospatial Boundaries/" includes examples of the geospatial data dependencies.
+
+
+## Data Processesing Files
+A series of scripts were used to process Global Fishing Watch data prior to dashboard analysis. These scripts are included in the folder titled /"Processing Files./"
+
+
 # Data Sources
 ## Fishing Effort and Vessel Characteristics Data: Global Fishing Watch
 Copyright 2021, Global Fishing Watch, Inc. Accessed on 30 June 2021. https://globalfishingwatch.org/data-download/datasets/public-fishing-effort.
