@@ -5,12 +5,14 @@ This dashboard explores changes in industrial fishing effort at various timescal
 
 # File Structure
 ## Dashboard Specific Files
-The Shiny-R script titled "LSMPA_Fishing_Effort_Dashboard.R" houses the code to run the LSMPA Fishing Effort Dashboard using Shiny-R, relying on data dependencies. The code relies on both filtered Global Fishing Watch Fishing Effort data and geospatial data dependencies (shapefiles). The folder titled "Geospatial Boundaries" includes examples of the geospatial data dependencies.
+The Shiny-R script titled "LSMPA_Fishing_Effort_Dashboard.R" houses the code to run the LSMPA Fishing Effort Dashboard using Shiny-R, relying on data dependencies. The code relies on filtered Global Fishing Watch Fishing Effort and vessel information data and geospatial data dependencies (shapefiles). The folder titled "Geospatial Boundaries" includes examples of the geospatial data dependencies. The folder titled "LSMPA Specific Datasets" includes examples of filtered Global Fishing Watch Fishing Effort data. The folder titled "Fishing Vessel Reference Information" includes Global Fishing Watch vessel information data.
 
 
 ## Data Processesing Files
 A series of scripts were used to process Global Fishing Watch data prior to dashboard analysis. These scripts are included in the folder titled "Processing Files."
 
+## Result Image Files
+Images of example resulting dashboard and analysis images are included in the folder titled "Result Images."
 
 # Data Sources
 ## Fishing Effort and Vessel Characteristics Data: Global Fishing Watch
