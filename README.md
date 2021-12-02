@@ -1,7 +1,7 @@
 # LSMPA Fishing Effort Dashboard
 
 
-This dashboard explores changes in industrial fishing effort at various timescales in regions with established Large-Scale Marine Protected Areas (LSMPAs), and relies on data downloaded from Global Fishing Watch, accessed under Creative Commons. Please see the \"Data Sources\" tab for citations.
+This dashboard explores changes in industrial fishing effort at various timescales in regions with established Large-Scale Marine Protected Areas (LSMPAs), and relies on data downloaded from Global Fishing Watch, accessed under Creative Commons.
 
 ## Fishing Effort and Vessel Characteristics Data: Global Fishing Watch
 Copyright 2021, Global Fishing Watch, Inc. Accessed on 30 June 2021. https://globalfishingwatch.org/data-download/datasets/public-fishing-effort.
